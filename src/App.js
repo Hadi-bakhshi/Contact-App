@@ -1,12 +1,28 @@
 import "./App.css";
-import Contacts from "./Components/Contacts/Contacts";
+import { useState } from "react";
+import AddContanctForm from "./Components/AddContactForm/AddContanctForm";
+import ContactList from "./Components/ContactList/ContactList";
 
 function App() {
+  const [contacts, setContacts] = useState([]);
+
+  const addContactHandle = (contact) => {
+    setContacts([
+      ...contacts,
+      { ...contact, id: Math.floor(Math.random() * 1000) },
+    ]);
+  };
+
+  const removeContactHandler = (id) => {
+    setContacts(contacts.filter((contact) => contact.id !== id));
+  };
+
   return (
-    <div className="App">
-      <h2>Contact Manager</h2>
-      <Contacts />
-    </div>
+    <main className="h-screen w-screen text-center">
+      <h1>Contact App</h1>
+      <AddContanctForm addContactHandle={addContactHandle} />
+      <ContactList contacts={contacts} onDelete={removeContactHandler} />
+    </main>
   );
 }
 

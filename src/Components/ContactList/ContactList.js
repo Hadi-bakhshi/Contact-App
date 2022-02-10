@@ -1,22 +1,17 @@
-const ContactList = ({ contacts }) => {
+const ContactList = ({ contacts, onDelete }) => {
   return (
-    <section>
-      {contacts.map((c) => (
-        <div
-          style={{
-            width: "100%",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "left",
-          }}
-          key={c.id}
-        >
-          <span style={{ display: "block" }}>Name: {c.name}</span>
-          <span style={{ display: "block" }}>Email: {c.email}</span>
-        </div>
-      ))}
-    </section>
+   <>
+   {
+     contacts.map(contact =>{
+       const { id, name, email } = contact;
+       return <div key={id}>
+         <p>Name :{name}</p>
+          <p>Email :{email}</p>
+          <button className="bg-red-100 text-red-700 p-2 mt-3 rounded-lg" onClick={()=>onDelete(id)}>Delete</button>
+       </div>
+     })
+   }
+   </>
   );
 };
 
