@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import AddContanctForm from "./Components/AddContactForm/AddContanctForm";
 import ContactList from "./Components/ContactList/ContactList";
 
@@ -15,7 +15,18 @@ function App() {
 
   const removeContactHandler = (id) => {
     setContacts(contacts.filter((contact) => contact.id !== id));
+    localStorage.removeItem(id);
   };
+
+  useEffect(() => {
+    const savedContacts = JSON.parse(localStorage.getItem('contacts'));
+    if (savedContacts) setContacts(savedContacts);
+  } , []);
+
+  useEffect(() => {
+    localStorage.setItem('contacts', JSON.stringify(contacts));
+  }, [contacts]);
+
 
   return (
     <main className="h-screen w-screen text-center">
