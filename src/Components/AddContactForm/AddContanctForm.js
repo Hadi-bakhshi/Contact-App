@@ -9,7 +9,7 @@ const AddContanctForm = ({ addContactHandle }) => {
     setContact({ ...contact, [e.target.name]: e.target.value });
   };
   const submitForm = (e) => {
-    if(!contact.name || !contact.email){
+    if (!contact.name || !contact.email) {
       alert("Please fill all the fields");
       return;
     }
@@ -19,28 +19,33 @@ const AddContanctForm = ({ addContactHandle }) => {
   };
 
   return (
-    <form onSubmit={submitForm}>
-      <div>
-        <label className="block">Name</label>
+    <form className="flex flex-col items-center" onSubmit={submitForm}>
+      <div className="flex flex-col items-start mt-5">
+        <label className="">Name</label>
         <input
-          className="bg-indigo-100 border border-indigo-600 rounded-sm"
+          className="outline-none rounded-md border-2 bg-indigo-50 border-indigo-300 py-1 px-2 focus:ring-2 ring-indigo-700"
           name="name"
           type="text"
           value={contact.name}
           onChange={changeHandler}
         />
       </div>
-      <div>
-        <label className="block">Email</label>
+      <div className="flex flex-col items-start mt-5">
+        <label className="">Email</label>
         <input
-          className="bg-indigo-100 border border-indigo-600 rounded-sm"
+          className="outline-none rounded-md border-2 bg-indigo-50 border-indigo-300 py-1 px-2 focus:ring-2 ring-indigo-700"
           name="email"
           type="text"
           value={contact.email}
           onChange={changeHandler}
         />
       </div>
-      <button type="submit" className="bg-green-100 text-green-700 p-2 mt-3 rounded-lg">Add contact</button>
+      <button
+        type="submit"
+        className="bg-indigo-500 text-white p-2 mt-5 rounded-lg hover:border-2 border-indigo-700"
+      >
+        Add contact
+      </button>
     </form>
   );
 };
