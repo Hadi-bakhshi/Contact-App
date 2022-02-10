@@ -19,7 +19,9 @@ function App() {
 
   return (
     <main className="h-screen w-screen text-center">
-      <h1 className="border-b-2 border-indigo-300 text-lg font-bold py-4">Contact App</h1>
+      <h1 className="border-b-2 border-indigo-300 text-lg font-bold py-4">
+        Contact App
+      </h1>
       <AddContanctForm addContactHandle={addContactHandle} />
       <ContactList contacts={contacts} onDelete={removeContactHandler} />
     </main>
