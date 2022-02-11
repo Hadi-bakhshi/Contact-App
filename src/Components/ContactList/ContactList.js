@@ -1,6 +1,19 @@
+import { Link } from "react-router-dom";
+
 const ContactList = ({ contacts, onDelete }) => {
   return (
     <section className="flex flex-col items-center">
+      {/* title and link button */}
+      <div>
+        <h2 className="font-medium py-2">Contacts</h2>
+        <Link to="/add">
+          <button className="bg-indigo-600 text-white py-1 px-4 rounded-md hover:ring-2 ring-indigo-800">
+            Add
+          </button>
+        </Link>
+      </div>
+      {/* end of title and link button */}
+
       {/* Map on the contacts */}
       {contacts.map((contact) => {
         const { id, name, email } = contact;

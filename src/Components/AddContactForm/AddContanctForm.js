@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const AddContanctForm = ({ addContactHandle }) => {
+const AddContanctForm = ({ addContactHandle, history }) => {
   const [contact, setContact] = useState({
     name: "",
     email: "",
@@ -16,6 +16,7 @@ const AddContanctForm = ({ addContactHandle }) => {
     e.preventDefault();
     addContactHandle(contact);
     setContact({ name: "", email: "" });
+    history.push("/");
   };
 
   return (
