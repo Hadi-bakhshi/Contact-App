@@ -34,7 +34,7 @@ function App() {
         Contact App
       </h1>
       <Switch>
-        <Route path="/user/:id" component={ContactDetail}/>
+        <Route path="/user/:id" component={ContactDetail} />
         <Route
           path="/add"
           render={(props) => (
@@ -47,7 +47,7 @@ function App() {
           render={(props) => (
             <ContactList
               contacts={contacts}
-              removeContactHandler={removeContactHandler}
+              onDelete={removeContactHandler}
               {...props}
             />
           )}

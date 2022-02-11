@@ -5,9 +5,9 @@ const Contact = ({ contact, onDelete }) => {
   return (
     <div
       key={id}
-      className="bg-slate-50 w-1/2 flex items-center justify-between p-1 border-2 border-slate-300 mt-5 rounded-md shadow-md"
+      className="contactList bg-slate-50 lg:w-1/2 w-full flex items-center justify-between p-1 border-2 border-slate-300 mt-5 rounded-md shadow-md"
     >
-      <div className="flex flex-row items-center">
+      <div className="contactListItem flex flex-row items-center">
         <img
           className="w-10 h-10 rounded-full mr-2"
           src="https://static.vecteezy.com/system/resources/previews/002/318/271/non_2x/user-profile-icon-free-vector.jpg"

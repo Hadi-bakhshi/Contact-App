@@ -1,2 +1,14 @@
-
-
+@media screen and (max-width: 600px) {
+  .contactList {
+    flex-direction: column;
+    font-size: 1.1rem;
+  }
+  .contactList button {
+    margin-bottom: 5px;
+  }
+  .contactListItem {
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+}
