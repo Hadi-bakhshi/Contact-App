@@ -14,7 +14,7 @@ const Contact = ({ contact, onDelete }) => {
           alt="avatar"
         />
 
-        <Link to={`user/${id}`}>
+        <Link to={{ pathname: `user/${id}`, state: { contact: contact } }}>
           <div className="flex flex-col items-start">
             <p>Name: {name}</p>
             <p>Email: {email}</p>

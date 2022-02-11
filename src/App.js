@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import AddContanctForm from "./Components/AddContactForm/AddContanctForm";
 import ContactList from "./Components/ContactList/ContactList";
 import { Switch, Route } from "react-router-dom";
+import ContactDetail from "./Components/ContactDetail/ContactDetail";
 function App() {
   const [contacts, setContacts] = useState([]);
 
@@ -33,6 +34,7 @@ function App() {
         Contact App
       </h1>
       <Switch>
+        <Route path="/user/:id" component={ContactDetail}/>
         <Route
           path="/add"
           render={(props) => (
