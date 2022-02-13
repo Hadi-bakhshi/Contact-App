@@ -4,29 +4,52 @@ import AddContanctForm from "./Components/AddContactForm/AddContanctForm";
 import ContactList from "./Components/ContactList/ContactList";
 import { Switch, Route } from "react-router-dom";
 import ContactDetail from "./Components/ContactDetail/ContactDetail";
+import { getAllContacts } from "./services/getContactsServices";
+import { deleteContacts } from "./services/deleteContactsService";
+import { addNewContact } from "./services/addContactService";
 function App() {
   const [contacts, setContacts] = useState([]);
 
-  const addContactHandle = (contact) => {
-    setContacts([
-      ...contacts,
-      { ...contact, id: Math.floor(Math.random() * 1000) },
-    ]);
+  const addContactHandle = async (contact) => {
+    try {
+      const { data } = await addNewContact(contact);
+      setContacts([...contacts, data]);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const removeContactHandler = (id) => {
-    setContacts(contacts.filter((contact) => contact.id !== id));
-    localStorage.removeItem(id);
+  const removeContactHandler = async (id) => {
+    try {
+      await deleteContacts(id);
+      setContacts(contacts.filter((contact) => contact.id !== id));
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
-    const savedContacts = JSON.parse(localStorage.getItem("contacts"));
-    if (savedContacts) setContacts(savedContacts);
+    const fetchContacts = async () => {
+      const { data } = await getAllContacts();
+      setContacts(data);
+    };
+    try {
+      fetchContacts();
+    } catch (error) {
+      console.log(error);
+    }
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem("contacts", JSON.stringify(contacts));
-  }, [contacts]);
+  // to use local storage these codes will be used
+
+  // useEffect(() => {
+  //   localStorage.setItem("contacts", JSON.stringify(contacts));
+  // }, [contacts]);
+
+  // useEffect(() => {
+  //   const savedContacts = JSON.parse(localStorage.getItem("contacts"));
+  //   if (savedContacts) setContacts(savedContacts);
+  // }, []);
 
   return (
     <main className="h-screen w-screen text-center">
