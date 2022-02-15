@@ -21,15 +21,24 @@ const Contact = ({ contact, onDelete }) => {
           </div>
         </Link>
       </div>
-      <button
-        className="bg-red-500 text-white p-2 rounded-lg"
-        onClick={() => {
-          if (window.confirm("Are you sure that you want to delete this item?"))
-            onDelete(id);
-        }}
-      >
-        Delete
-      </button>
+      <div>
+        <Link to={`/edit/${id}`}>
+          <button className="bg-indigo-600 text-white p-2 rounded-lg mr-3">
+            Edit
+          </button>
+        </Link>
+        <button
+          className="bg-red-500 text-white p-2 rounded-lg"
+          onClick={() => {
+            if (
+              window.confirm("Are you sure that you want to delete this item?")
+            )
+              onDelete(id);
+          }}
+        >
+          Delete
+        </button>
+      </div>
     </div>
   );
 };
