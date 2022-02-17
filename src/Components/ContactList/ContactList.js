@@ -5,12 +5,15 @@ import { getAllContacts } from "../../services/getContactsServices";
 import { deleteContacts } from "../../services/deleteContactsService";
 
 const ContactList = (props) => {
-  const [contacts, setContacts] = useState([]);
+  const [contacts, setContacts] = useState(null);
+  const [allContacts, setAllContacts] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const fetchContacts = async () => {
       const { data } = await getAllContacts();
       setContacts(data);
+      setAllContacts(data);
     };
     try {
       fetchContacts();
@@ -27,6 +30,19 @@ const ContactList = (props) => {
       console.log(error);
     }
   };
+
+  const searchHandler = (e) => {
+    setSearchTerm(e.target.value);
+    const search = e.target.value.toLowerCase();
+    if (search !== "") {
+      const filteredContacts = allContacts.filter((c) => {
+        return Object.values(c).join("").toLowerCase().includes(search);
+      });
+      setContacts(filteredContacts);
+    } else {
+      setContacts(allContacts);
+    }
+  };
   return (
     <section className="flex flex-col items-center mx-2">
       <div className="w-1/2 flex flex-row justify-between items-center">
@@ -37,7 +53,15 @@ const ContactList = (props) => {
           </button>
         </Link>
       </div>
-
+      <div>
+        <input
+          className="bg-indigo-100"
+          placeholder="Search contacts ..."
+          type="search"
+          value={searchTerm}
+          onChange={searchHandler}
+        />
+      </div>
       {contacts ? (
         contacts.map((contact) => {
           return (
