@@ -1,22 +1,28 @@
 import { useState } from "react";
+import { addNewContact } from "../../services/addContactService";
 
-const AddContanctForm = ({ addContactHandle, history }) => {
+const AddContanctForm = ({ history }) => {
   const [contact, setContact] = useState({
     name: "",
     email: "",
   });
+
   const changeHandler = (e) => {
     setContact({ ...contact, [e.target.name]: e.target.value });
   };
-  const submitForm = (e) => {
+  const submitForm = async (e) => {
     if (!contact.name || !contact.email) {
       alert("Please fill all the fields");
       return;
     }
     e.preventDefault();
-    addContactHandle(contact);
-    setContact({ name: "", email: "" });
-    history.push("/");
+    try {
+      await addNewContact(contact);
+      setContact({ name: "", email: "" });
+      history.push("/");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

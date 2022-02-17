@@ -4,7 +4,6 @@ const Contact = ({ contact, onDelete }) => {
   const { name, id, email } = contact;
   return (
     <div
-      key={id}
       className="contactList bg-slate-50 lg:w-1/2 w-full flex items-center justify-between p-1 border-2 border-slate-300 mt-5 rounded-md shadow-md"
     >
       <div className="contactListItem flex flex-row items-center">

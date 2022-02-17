@@ -1,35 +1,35 @@
 import { useState, useEffect } from "react";
 import { getOneContact } from "../../services/getOneContact";
-const EditContact = ({ editContactHandler, history, match }) => {
+import http from "../../services/httpServices";
+const EditContact = ({ history, match }) => {
   const [contact, setContact] = useState({
     name: "",
     email: "",
   });
+
   const changeHandler = (e) => {
     setContact({ ...contact, [e.target.name]: e.target.value });
   };
-  const submitForm = (e) => {
+
+  const submitForm = async (e) => {
     if (!contact.name || !contact.email) {
       alert("Please fill all the fields");
       return;
     }
     e.preventDefault();
-    editContactHandler(contact, match.params.id);
-    setContact({ name: "", email: "" });
-    history.push("/");
+    try {
+      await http.put(`/contacts/${match.params.id}`, contact);
+      history.push("/");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
-    const localFetch = async () => {
-      try {
-        const { data } = await getOneContact(match.params.id);
-        setContact({ name: data.name, email: data.email });
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    localFetch();
-  }, []);
+    getOneContact(match.params.id)
+      .then((res) => setContact({ name: res.data.name, email: res.data.email }))
+      .catch((err) => console.log(err));
+  }, [match.params.id]);
 
   return (
     <form className="flex flex-col items-center" onSubmit={submitForm}>
